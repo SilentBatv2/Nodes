@@ -11,9 +11,19 @@ Renderer::~Renderer()
 {
 }
 
+void DebugCallback (unsigned int source, unsigned int type,
+	unsigned int id, unsigned int severity,
+	int length, const char* message, const void* userParam)
+{
+	std::string errormessage = std::to_string(source) + ", " + std::to_string(type) + ", " + std::to_string(severity) + message;
+	QMessageBox::critical((QWidget*)userParam, "OpenGL Error", errormessage.c_str());
+}
+
 void Renderer::initializeGL()
 {
 	initializeOpenGLFunctions();
+
+	glDebugMessageCallback(DebugCallback, this);
 
     writer = new Writer("res/arial.fnt", "res/arial.png");
 

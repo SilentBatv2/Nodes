@@ -6,6 +6,8 @@ Writer::Writer(std::string fntpath, std::string texpath) : texturepath(texpath)
 	loadFont(data ,fntpath);
 
     initializeOpenGLFunctions();
+
+    setShader();
 }
 
 Writer::~Writer()
